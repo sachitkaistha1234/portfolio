@@ -113,7 +113,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden">
       {/* Confetti burst for resume button */}
       {showConfetti && (
         <div className="fixed inset-0 z-50 pointer-events-none">

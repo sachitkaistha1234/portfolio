@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import InteractiveSkills from './components/InteractiveSkills';
@@ -35,6 +36,7 @@ function App() {
       
       {/* Main Content */}
       <div className={`transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+        <Navbar />
         <Hero />
         <About />
         <InteractiveSkills />

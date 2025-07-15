@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle, Github, Linkedin, User, MessageSquare, AlertCircle } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -37,46 +36,16 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
     setError('');
     
-    try {
-      // EmailJS configuration
-      const serviceId = 'service_portfolio'; // You'll need to replace this
-      const templateId = 'template_contact'; // You'll need to replace this
-      const publicKey = 'YOUR_PUBLIC_KEY'; // You'll need to replace this
-
-      // Prepare template parameters
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        to_email: 'skaistha16@gmail.com',
-        message: formData.message,
-        reply_to: formData.email,
-        subject: `Portfolio Contact: Message from ${formData.name}`,
-        timestamp: new Date().toLocaleString()
-      };
-
-      // Send email using EmailJS
-      const result = await emailjs.send(
-        serviceId,
-        templateId,
-        templateParams,
-        publicKey
-      );
-
-      if (result.status === 200) {
-        setIsSubmitting(false);
-        setSubmitted(true);
-        setFormData({ name: '', email: '', message: '' });
-        
-        // Reset success message after 5 seconds
-        setTimeout(() => setSubmitted(false), 5000);
-      } else {
-        throw new Error('Failed to send email');
-      }
-    } catch (err) {
-      console.error('Email sending error:', err);
+    // Simulate form submission for demo purposes
+    // In production, replace this with actual EmailJS implementation
+    setTimeout(() => {
       setIsSubmitting(false);
-      setError('Failed to send message. Please try contacting me directly via email or phone.');
-    }
+      setSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setSubmitted(false), 5000);
+    }, 2000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

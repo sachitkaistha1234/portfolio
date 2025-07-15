@@ -104,7 +104,12 @@ const Hero: React.FC = () => {
   const handleResumeClick = () => {
     setShowConfetti(true);
     setTimeout(() => setShowConfetti(false), 1200);
-    // Add your download logic here
+    
+    // Create a temporary download link for resume
+    const link = document.createElement('a');
+    link.href = '#'; // Replace with actual resume URL when available
+    link.download = 'Sachit_Kaistha_Resume.pdf';
+    link.click();
   };
 
   return (

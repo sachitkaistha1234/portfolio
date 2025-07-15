@@ -212,7 +212,7 @@ const Footer: React.FC = () => {
               <div className="flex items-center gap-2 text-slate-400">
                 <span>&copy; {currentYear} Sachit Kaistha. Made with</span>
                 <Heart className="w-4 h-4 text-red-400 animate-pulse" />
-                <span>using React & TypeScript</span>
+                <span>using React, TypeScript & Tailwind CSS</span>
               </div>
               <div className="flex items-center gap-6 text-sm text-slate-400">
                 <span>Available for freelance projects</span>

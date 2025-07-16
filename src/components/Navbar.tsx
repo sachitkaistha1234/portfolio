@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Home, User, Code, GraduationCap, Briefcase, Award, FolderOpen, MessageCircle, Sun, Moon } from 'lucide-react';
+import { Menu, X, Home, User, Code, GraduationCap, Briefcase, Award, FolderOpen, MessageCircle, Sun, Moon, Zap, Download } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const { theme, toggleTheme } = useTheme();
 
   const navItems = [
@@ -22,7 +23,12 @@ const Navbar: React.FC = () => {
   // Handle scroll effects
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      
+      setIsScrolled(scrollTop > 50);
+      setScrollProgress(scrollPercent);
       
       // Update active section based on scroll position
       const sections = navItems.map(item => item.id);
@@ -56,31 +62,53 @@ const Navbar: React.FC = () => {
     setIsOpen(false);
   };
 
+  const handleResumeDownload = () => {
+    // Create a temporary download link for resume
+    const link = document.createElement('a');
+    link.href = '#'; // Replace with actual resume URL when available
+    link.download = 'Sachit_Kaistha_Resume.pdf';
+    link.click();
+  };
+
   return (
     <>
+      {/* Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-slate-200/20 dark:bg-slate-800/20">
+        <div 
+          className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-300 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
       {/* Main Navbar */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
         isScrolled 
-          ? 'glass-card backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 shadow-lg border-b border-white/20 dark:border-slate-700/30' 
+          ? 'glass-morphism backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 shadow-2xl border-b border-white/20 dark:border-slate-700/30' 
           : 'bg-transparent'
       }`}>
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg">S</span>
+            {/* Enhanced Logo */}
+            <div className="flex items-center gap-4 group cursor-pointer" onClick={() => scrollToSection('hero')}>
+              <div className="relative">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-xl group-hover:scale-110 transition-all duration-300">
+                  <span className="text-white font-bold text-xl">S</span>
+                </div>
+                {/* Animated ring */}
+                <div className="absolute inset-0 rounded-2xl border-2 border-blue-400/30 animate-pulse"></div>
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                  Sachit
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
+                  Sachit Kaistha
                 </h1>
-                <p className="text-xs text-slate-600 dark:text-slate-400">DevOps Engineer</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">
+                  DevOps Engineer & Backend Developer
+                </p>
               </div>
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-2">
               {navItems.map((item) => {
                 const IconComponent = item.icon;
                 return (
@@ -88,10 +116,10 @@ const Navbar: React.FC = () => {
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
                     className={`
-                      flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300
-                      hover:scale-105 hover:shadow-lg group relative
+                      group relative flex items-center gap-2 px-4 py-3 rounded-xl transition-all duration-300
+                      hover:scale-105 hover:shadow-lg
                       ${activeSection === item.id 
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg' 
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105' 
                         : 'text-slate-700 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-slate-800/50'
                       }
                     `}
@@ -101,61 +129,75 @@ const Navbar: React.FC = () => {
                     
                     {/* Active indicator */}
                     {activeSection === item.id && (
-                      <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
+                      <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white rounded-full animate-pulse"></div>
                     )}
+                    
+                    {/* Hover glow effect */}
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
                   </button>
                 );
               })}
             </div>
 
             {/* Right side controls */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              {/* Resume Download Button */}
+              <button
+                onClick={handleResumeDownload}
+                className="hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group"
+              >
+                <Download className="w-4 h-4 group-hover:animate-bounce" />
+                <span className="font-medium">Resume</span>
+              </button>
+
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="p-3 rounded-xl bg-white/50 dark:bg-slate-800/50 hover:bg-white/70 dark:hover:bg-slate-700/70 transition-all duration-300 hover:scale-110 shadow-lg"
+                className="p-3 rounded-xl glass-morphism hover:bg-white/70 dark:hover:bg-slate-700/70 transition-all duration-300 hover:scale-110 shadow-lg group"
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               >
                 {theme === 'light' ? (
-                  <Moon className="w-5 h-5 text-slate-600" />
+                  <Moon className="w-5 h-5 text-slate-600 group-hover:text-purple-600 transition-colors duration-300" />
                 ) : (
-                  <Sun className="w-5 h-5 text-yellow-500" />
+                  <Sun className="w-5 h-5 text-yellow-500 group-hover:text-yellow-400 transition-colors duration-300" />
                 )}
               </button>
 
-              {/* CTA Button */}
+              {/* Enhanced CTA Button */}
               <button
                 onClick={() => scrollToSection('contact')}
-                className="hidden md:flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="hidden md:flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group relative overflow-hidden"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span className="font-medium">Let's Talk</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <MessageCircle className="w-4 h-4 relative z-10 group-hover:animate-pulse" />
+                <span className="font-medium relative z-10">Let's Talk</span>
+                <Zap className="w-4 h-4 relative z-10 group-hover:animate-bounce" />
               </button>
 
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="lg:hidden p-3 rounded-xl bg-white/50 dark:bg-slate-800/50 hover:bg-white/70 dark:hover:bg-slate-700/70 transition-all duration-300 shadow-lg"
+                className="lg:hidden p-3 rounded-xl glass-morphism hover:bg-white/70 dark:hover:bg-slate-700/70 transition-all duration-300 shadow-lg group"
                 aria-label="Toggle menu"
               >
                 {isOpen ? (
-                  <X className="w-5 h-5 text-slate-700 dark:text-slate-300" />
+                  <X className="w-5 h-5 text-slate-700 dark:text-slate-300 group-hover:rotate-90 transition-transform duration-300" />
                 ) : (
-                  <Menu className="w-5 h-5 text-slate-700 dark:text-slate-300" />
+                  <Menu className="w-5 h-5 text-slate-700 dark:text-slate-300 group-hover:scale-110 transition-transform duration-300" />
                 )}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
+        {/* Enhanced Mobile Navigation Menu */}
         <div className={`
-          lg:hidden absolute top-full left-0 right-0 transition-all duration-300 overflow-hidden
+          lg:hidden absolute top-full left-0 right-0 transition-all duration-500 overflow-hidden
           ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}
         `}>
-          <div className="glass-card backdrop-blur-xl bg-white/90 dark:bg-slate-900/90 border-t border-white/20 dark:border-slate-700/30 shadow-xl">
+          <div className="glass-morphism backdrop-blur-xl bg-white/90 dark:bg-slate-900/90 border-t border-white/20 dark:border-slate-700/30 shadow-2xl">
             <div className="container mx-auto px-6 py-6">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 mb-6">
                 {navItems.map((item) => {
                   const IconComponent = item.icon;
                   return (
@@ -164,47 +206,48 @@ const Navbar: React.FC = () => {
                       onClick={() => scrollToSection(item.id)}
                       className={`
                         flex items-center gap-3 p-4 rounded-xl transition-all duration-300
-                        hover:scale-105 hover:shadow-lg
+                        hover:scale-105 hover:shadow-lg group
                         ${activeSection === item.id 
                           ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg' 
-                          : 'bg-white/50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 hover:bg-white/70 dark:hover:bg-slate-700/70'
+                          : 'glass-morphism text-slate-700 dark:text-slate-300 hover:bg-white/70 dark:hover:bg-slate-700/70'
                         }
                       `}
                     >
-                      <IconComponent className="w-5 h-5" />
+                      <IconComponent className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                       <span className="font-medium">{item.label}</span>
                     </button>
                   );
                 })}
               </div>
               
-              {/* Mobile CTA */}
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="w-full mt-4 flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg"
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span className="font-medium">Let's Talk</span>
-              </button>
+              {/* Mobile Action Buttons */}
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={handleResumeDownload}
+                  className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  <Download className="w-5 h-5" />
+                  <span className="font-medium">Download Resume</span>
+                </button>
+                
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  <span className="font-medium">Let's Connect</span>
+                  <Zap className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Scroll Progress Indicator */}
-      <div className="fixed top-0 left-0 right-0 z-40 h-1 bg-slate-200 dark:bg-slate-800">
-        <div 
-          className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-300 ease-out"
-          style={{ 
-            width: `${Math.min(100, (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100)}%` 
-          }}
-        />
-      </div>
-
       {/* Backdrop for mobile menu */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}

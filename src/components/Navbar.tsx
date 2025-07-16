@@ -99,7 +99,7 @@ const Navbar: React.FC = () => {
               </div>
               <div className="hidden sm:block">
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
-                  Sachit Kaistha
+                  Sachit
                 </h1>
                 <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">
                   DevOps Engineer & Backend Developer

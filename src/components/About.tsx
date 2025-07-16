@@ -253,7 +253,7 @@ const About: React.FC = () => {
                         
                         <p>
                           The transition to <span className="text-purple-500 font-semibold">DevOps</span> felt like a natural 
-                          evolution. I realized that great software isn't just about writing code—it's about creating systems 
+                          evolution. I realized that great software isn't just about writing code—it\'s about creating systems 
                           that are reliable, scalable, and maintainable. This led me to dive deep into containerization, 
                           CI/CD pipelines, and cloud infrastructure.
                         </p>

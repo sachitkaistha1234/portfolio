@@ -10,6 +10,7 @@ import ProjectShowcase from './components/ProjectShowcase';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import TerminalLoader from './components/TerminalLoader';
+import AIChat from './components/AIChat';
 import { useTheme } from './hooks/useTheme';
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
         <ProjectShowcase />
         <Contact />
         <Footer />
+        <AIChat />
       </div>
     </div>
   );

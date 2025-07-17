@@ -26,7 +26,7 @@ const Education: React.FC = () => {
     {
       degree: "Master of Computer Applications (MCA)",
       period: "June 2023 - June 2025",
-      status: "Pursuing",
+      status: "Awaiting Result",
       description: "Advanced studies in computer science, software engineering, and emerging technologies.",
       highlights: ["Advanced Programming", "System Design", "Cloud Computing", "DevOps Practices"]
     },

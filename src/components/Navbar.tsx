@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
     // Create a temporary download link for resume
     const link = document.createElement('a');
     link.href = '#'; // Replace with actual resume URL when available
-    link.download = 'Sachit_Kaistha_Resume.pdf';
+    link.download = 'Sachit_Resume.pdf';
     link.click();
   };
 
@@ -80,10 +80,10 @@ const Navbar: React.FC = () => {
         />
       </div>
 
-      {/* Main Navbar */}
+      {/* Main Navbar - Glassmorphism Design */}
       <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
         isScrolled 
-          ? 'glass-morphism backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 shadow-2xl border-b border-white/20 dark:border-slate-700/30' 
+          ? 'backdrop-blur-xl bg-white/10 dark:bg-slate-900/10 shadow-2xl border-b border-white/20 dark:border-slate-700/30' 
           : 'bg-transparent'
       }`}>
         <div className="container mx-auto px-6">
@@ -107,7 +107,7 @@ const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation - Glassmorphism Style */}
             <div className="hidden lg:flex items-center gap-2">
               {navItems.map((item) => {
                 const IconComponent = item.icon;
@@ -117,10 +117,10 @@ const Navbar: React.FC = () => {
                     onClick={() => scrollToSection(item.id)}
                     className={`
                       group relative flex items-center gap-2 px-4 py-3 rounded-xl transition-all duration-300
-                      hover:scale-105 hover:shadow-lg
+                      hover:scale-105 hover:shadow-lg backdrop-blur-sm
                       ${activeSection === item.id 
                         ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105' 
-                        : 'text-slate-700 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-slate-800/50'
+                        : 'text-slate-700 dark:text-slate-300 hover:bg-white/20 dark:hover:bg-slate-800/20'
                       }
                     `}
                   >
@@ -144,7 +144,7 @@ const Navbar: React.FC = () => {
               {/* Resume Download Button */}
               <button
                 onClick={handleResumeDownload}
-                className="hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group"
+                className="hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group backdrop-blur-sm"
               >
                 <Download className="w-4 h-4 group-hover:animate-bounce" />
                 <span className="font-medium">Resume</span>
@@ -153,7 +153,7 @@ const Navbar: React.FC = () => {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="p-3 rounded-xl glass-morphism hover:bg-white/70 dark:hover:bg-slate-700/70 transition-all duration-300 hover:scale-110 shadow-lg group"
+                className="p-3 rounded-xl backdrop-blur-sm bg-white/10 dark:bg-slate-800/10 hover:bg-white/20 dark:hover:bg-slate-700/20 transition-all duration-300 hover:scale-110 shadow-lg group border border-white/20 dark:border-slate-700/30"
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               >
                 {theme === 'light' ? (
@@ -166,7 +166,7 @@ const Navbar: React.FC = () => {
               {/* Enhanced CTA Button */}
               <button
                 onClick={() => scrollToSection('contact')}
-                className="hidden md:flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group relative overflow-hidden"
+                className="hidden md:flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group relative overflow-hidden backdrop-blur-sm"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <MessageCircle className="w-4 h-4 relative z-10 group-hover:animate-pulse" />
@@ -177,7 +177,7 @@ const Navbar: React.FC = () => {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="lg:hidden p-3 rounded-xl glass-morphism hover:bg-white/70 dark:hover:bg-slate-700/70 transition-all duration-300 shadow-lg group"
+                className="lg:hidden p-3 rounded-xl backdrop-blur-sm bg-white/10 dark:bg-slate-800/10 hover:bg-white/20 dark:hover:bg-slate-700/20 transition-all duration-300 shadow-lg group border border-white/20 dark:border-slate-700/30"
                 aria-label="Toggle menu"
               >
                 {isOpen ? (
@@ -195,7 +195,7 @@ const Navbar: React.FC = () => {
           lg:hidden absolute top-full left-0 right-0 transition-all duration-500 overflow-hidden
           ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}
         `}>
-          <div className="glass-morphism backdrop-blur-xl bg-white/90 dark:bg-slate-900/90 border-t border-white/20 dark:border-slate-700/30 shadow-2xl">
+          <div className="backdrop-blur-xl bg-white/10 dark:bg-slate-900/10 border-t border-white/20 dark:border-slate-700/30 shadow-2xl">
             <div className="container mx-auto px-6 py-6">
               <div className="grid grid-cols-2 gap-3 mb-6">
                 {navItems.map((item) => {
@@ -206,10 +206,10 @@ const Navbar: React.FC = () => {
                       onClick={() => scrollToSection(item.id)}
                       className={`
                         flex items-center gap-3 p-4 rounded-xl transition-all duration-300
-                        hover:scale-105 hover:shadow-lg group
+                        hover:scale-105 hover:shadow-lg group backdrop-blur-sm
                         ${activeSection === item.id 
                           ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg' 
-                          : 'glass-morphism text-slate-700 dark:text-slate-300 hover:bg-white/70 dark:hover:bg-slate-700/70'
+                          : 'bg-white/10 dark:bg-slate-800/10 text-slate-700 dark:text-slate-300 hover:bg-white/20 dark:hover:bg-slate-700/20'
                         }
                       `}
                     >
@@ -224,7 +224,7 @@ const Navbar: React.FC = () => {
               <div className="flex flex-col gap-3">
                 <button
                   onClick={handleResumeDownload}
-                  className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg"
+                  className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg backdrop-blur-sm"
                 >
                   <Download className="w-5 h-5" />
                   <span className="font-medium">Download Resume</span>
@@ -232,7 +232,7 @@ const Navbar: React.FC = () => {
                 
                 <button
                   onClick={() => scrollToSection('contact')}
-                  className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg"
+                  className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg backdrop-blur-sm"
                 >
                   <MessageCircle className="w-5 h-5" />
                   <span className="font-medium">Let's Connect</span>

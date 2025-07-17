@@ -24,22 +24,22 @@ const Experience: React.FC = () => {
 
   const experiences = [
     {
-      title: "DevOps Engineer",
-      company: "Current Role",
+      title: "Backend Development Intern",
+      company: "Technical Arsenal",
       period: "Present",
-      type: "Full-time",
+      type: "Internship",
       location: "Remote",
       status: "current",
       icon: Server,
-      description: "Transitioning into DevOps with focus on automation, CI/CD pipelines, and cloud infrastructure.",
+      description: "Currently doing an internship at Technical Arsenal in Backend Development, focusing on server-side technologies and database management.",
       responsibilities: [
-        "Designing and implementing CI/CD pipelines using Jenkins and GitHub Actions",
-        "Containerizing applications with Docker and orchestrating deployments",
-        "Managing cloud infrastructure on AWS with focus on scalability",
-        "Automating routine tasks through Bash scripting and configuration management",
-        "Monitoring and optimizing system performance and reliability"
+        "Developing backend applications using Python and modern frameworks",
+        "Working with databases and optimizing query performance",
+        "Building and maintaining RESTful APIs for web applications",
+        "Collaborating with development teams on server-side architecture",
+        "Learning DevOps practices and deployment automation"
       ],
-      technologies: ["Docker", "Jenkins", "GitHub Actions", "AWS", "Linux", "Bash", "Nginx"]
+      technologies: ["Python", "Docker", "GitHub Actions", "AWS", "Linux", "Bash", "Nginx"]
     },
     {
       title: "PHP Web Developer",

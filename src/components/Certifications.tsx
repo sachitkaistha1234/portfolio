@@ -25,8 +25,8 @@ const Certifications: React.FC = () => {
 
   const certifications = [
     {
-      title: "PHP for Beginners",
-      issuer: "Udemy",
+      title: "PHP",
+      issuer: "CS Soft Solutions, Chandigarh",
       year: "2022",
       description: "Comprehensive course covering PHP fundamentals and web development basics.",
       color: "from-purple-500 to-pink-500",
